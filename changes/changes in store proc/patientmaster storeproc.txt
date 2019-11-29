@@ -1,0 +1,25 @@
+CREATE DEFINER=`bccappuser`@`localhost` PROCEDURE `patient_master`( IN Pid int,IN `p_name` text,IN `p_age` text,IN `p_sex` text,IN `p_cd_no` text,IN `p_address` text,
+  IN `p_phone_no` text,IN `p_last_created_name` text, IN `p_last_created_time` text,in `p_index_number` text, IN `p_religion` text,IN `p_hospitalname` text,
+  IN DbFlage text)
+BEGIN
+case
+
+when DbFlage ='p_master_insert' then
+	INSERT INTO `patient_master`(`patient_id`,`name`,`age`,`sex`,`cd_no`,`address`,`phone_no`,`last_created_name`,`last_created_time`,`index_id`,`religion`,`hospitalname` )
+	values(Pid, `p_name`,`p_age`, `p_sex`,`p_cd_no`,`p_address`,`p_phone_no`,`p_last_created_name`,`p_last_created_time`,`p_index_number`,`p_religion`,`p_hospitalname`);
+when DbFlage ='p_master_update' then
+	 UPDATE `patient_master` SET`name` = `p_name`, `age` = `p_age`,`sex` = `p_sex`,`cd_no` = `p_cd_no`,`address` = `p_address`,
+    `phone_no` = `p_phone_no`,`last_created_name` = `p_last_created_name`,`last_created_time` = `p_last_created_time`,`index_id`=`p_index_number`,
+    `religion`=`p_religion`, `hospitalname`=`p_hospitalname` WHERE (`patient_id` = `Pid`);
+
+end case;  
+END
+
+
+
+
+
+store proc:
+
+ when DbFlage='patient_info' then
+	 select patient_id, secomd_primary,date_of_admission,name, age, sex,cd_no,address,phone_no,occupation,diag_type,diag_organ,diag_sub_type,diag_input,index_no,diagnosis_sub_type, patient_agreement,religion,hospitalname from demography where patient_id=pid;
