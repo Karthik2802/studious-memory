@@ -1,0 +1,86 @@
+CREATE DEFINER=`bccappuser`@`localhost` PROCEDURE `Investigation_Histo`(
+  IN `p_patient_id` int,
+  IN `p_inv_histopathology_id` text,
+  IN `p_inv_histopathology_number1` text,
+  IN `p_inv_histopathology_date1` text,
+  IN `p_inv_histopathology_histological_type1` text,
+  IN `p_inv_histopathology_histological_type2` text,
+  IN `p_inv_histopathology_histological_grade1` text,
+  IN `p_inv_histopathology_number2` text,
+  IN `p_inv_histopathology_date2` text,
+  IN `p_inv_histopathology_histological_type3` text,
+  IN `p_inv_histopathology_histological_type4` text,
+  IN `p_inv_histopathology_histological_grade2` text,
+  IN `p_last_updated_by` text,
+  IN `p_last_updated_time` text,
+  IN `p_labname` text,
+  IN DbFlage text
+)
+BEGIN
+
+case
+    when DbFlage ='insert_Histo_h1' then
+				 INSERT INTO `investication_histopathology`
+					  (
+						`patient_id`,
+						`inv_histopathology_id`,
+						`inv_histopathology_number1`,
+						`inv_histopathology_date1`,
+						`inv_histopathology_histological_type1`,
+						`inv_histopathology_histological_type2`,
+						`inv_histopathology_histological_grade1`,
+						`inv_histopathology_number2`,
+						`inv_histopathology_date2`,
+						`inv_histopathology_histological_type3`,
+						`inv_histopathology_histological_type4`,
+						`inv_histopathology_histological_grade2`,
+						`last_updated_by`,
+						`last_updated_time`,
+                        `labname`
+					  )
+					  VALUES 
+					  (
+						`p_patient_id`,
+						`p_inv_histopathology_id`,
+						`p_inv_histopathology_number1`,
+						`p_inv_histopathology_date1`,
+						`p_inv_histopathology_histological_type1`,
+						`p_inv_histopathology_histological_type2`,
+						`p_inv_histopathology_histological_grade1`,
+						`p_inv_histopathology_number2`,
+						`p_inv_histopathology_date2`,
+						`p_inv_histopathology_histological_type3`,
+						`p_inv_histopathology_histological_type4`,
+						`p_inv_histopathology_histological_grade2`,
+						`p_last_updated_by`,
+						`p_last_updated_time`,
+                        `p_labname`
+					  );
+                      
+           when DbFlage ='Update_Histo_h1' then  
+           
+					 UPDATE `investication_histopathology` SET
+								
+								`inv_histopathology_id` = `p_inv_histopathology_id`,
+								`inv_histopathology_number1` = `p_inv_histopathology_number1`,
+								`inv_histopathology_date1` = `p_inv_histopathology_date1`,
+								`inv_histopathology_histological_type1` = `p_inv_histopathology_histological_type1`,
+								`inv_histopathology_histological_type2` = `p_inv_histopathology_histological_type2`,
+								`inv_histopathology_histological_grade1` = `p_inv_histopathology_histological_grade1`,
+								`inv_histopathology_number2` = `p_inv_histopathology_number2`,
+								`inv_histopathology_date2` = `p_inv_histopathology_date2`,
+								`inv_histopathology_histological_type3` = `p_inv_histopathology_histological_type3`,
+								`inv_histopathology_histological_type4` = `p_inv_histopathology_histological_type4`,
+								`inv_histopathology_histological_grade2` = `p_inv_histopathology_histological_grade2`,
+								`last_updated_by` = `p_last_updated_by`,
+								`last_updated_time` = `p_last_updated_time`,
+                                `labmame` = `p_labname`
+							  WHERE `patient_id` = `p_patient_id` ;
+                              
+                              
+                             
+    
+
+end case;
+
+END

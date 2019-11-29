@@ -1,0 +1,96 @@
+CREATE DEFINER=`bccappuser`@`localhost` PROCEDURE `demography`(IN `p_patient_id` int,  IN `p_secomd_primary` text,
+  IN `p_name` text,  IN `p_age` text,  IN `p_sex` text,  IN `p_cd_no` text, IN `p_address` text,  IN `p_phone_no` text,  IN `p_occupation` text,  IN `p_diag_type` text,  IN `p_diag_organ` text,  IN `p_diag_sub_type` text,  IN `p_diag_input` text,
+  IN `p_clinic_stg_tumour_type` text,  IN `p_clinic_stg_tumour_sub_type` text,  IN `p_clinic_stg_nodal_type` text,  IN `p_clinic_nodal_sub_type` text,  IN `p_clinic_stg_metastasis_type` text,  IN `p_clinic_stg_metastasis_sub_type` text,  IN `p_current_stage` text,  IN `p_stage_group_type` text,  IN `p_stage_group_sub_type` text,
+  IN `p_recorded_by` text,  IN `p_consultant` text,  IN `p_referral_physician` text,  IN `p_referral_hospital` text,
+  IN `p_last_updated_by` text,  IN `p_last_updated_time` text,  IN `p_date_of_admission` text, IN `p_index_no` text, In `p_diagnosis_sub_type` text,
+  IN `p_patient_agreement` text, IN `p_religion` text, IN `p_hospitalname` text,  in DbFlage text)
+BEGIN
+case
+	when DbFlage='p_demography_insert' then
+		INSERT INTO `demography` (`patient_id`, `secomd_primary`,`name`,`age`,`sex`,`cd_no`,`address`,`phone_no`,`occupation`,
+    `diag_type`,`diag_organ`,`diag_sub_type`,`diag_input`, `last_updated_by`,
+    `last_updated_time`, `date_of_admission`,`index_no`,`diagnosis_sub_type`,`patient_agreement`,`religion`,`hospitalname`)
+  VALUES 
+  (
+    `p_patient_id`,
+    `p_secomd_primary`,
+    `p_name`,
+    `p_age`,
+    `p_sex`,
+    `p_cd_no`,
+    `p_address`,
+    `p_phone_no`,
+    `p_occupation`,
+    `p_diag_type`,
+    `p_diag_organ`,
+    `p_diag_sub_type`,
+    `p_diag_input`,   
+    `p_last_updated_by`,
+    `p_last_updated_time`,
+    `p_date_of_admission`,
+    `p_index_no`,
+    `p_diagnosis_sub_type`,
+    `p_patient_agreement`,
+    `p_religion`,
+    `p_hospitalname`
+  );
+  
+  when DbFlage='p_demography_update' then
+	UPDATE `demography` SET
+    `secomd_primary` = `p_secomd_primary`,
+    `name` = `p_name`,
+    `age` = `p_age`,
+    `sex` = `p_sex`,
+    `cd_no` = `p_cd_no`,
+    `address` = `p_address`,
+    `phone_no` = `p_phone_no`,
+    `occupation` = `p_occupation`,
+    `diag_type` = `p_diag_type`,
+    `diag_organ` = `p_diag_organ`,
+    `diag_sub_type` = `p_diag_sub_type`,
+    `diag_input` = `p_diag_input`,    
+    `last_updated_by` = `p_last_updated_by`,
+    `last_updated_time` = `p_last_updated_time`,
+    `date_of_admission` = `p_date_of_admission`,
+    `index_no`=`p_index_no`,
+    `diagnosis_sub_type` = `p_diagnosis_sub_type`,
+    `patient_agreement`=`p_patient_agreement`,
+    `religion` = `p_religion`,
+     `hospitalname` = `p_hospitalname`
+  WHERE 
+    (`patient_id` = `p_patient_id`);
+    
+     when DbFlage='update_demo_graphy_clinical' then
+      UPDATE `demography` SET
+   
+			`clinic_stg_tumour_type` = `p_clinic_stg_tumour_type`,
+			`clinic_stg_tumour_sub_type` = `p_clinic_stg_tumour_sub_type`,
+			`clinic_stg_nodal_type` = `p_clinic_stg_nodal_type`,
+			`clinic_nodal_sub_type` = `p_clinic_nodal_sub_type`,
+			`clinic_stg_metastasis_type` = `p_clinic_stg_metastasis_type`,
+			`clinic_stg_metastasis_sub_type` = `p_clinic_stg_metastasis_sub_type`,
+			`current_stage` = `p_current_stage`,
+			`stage_group_type` = `p_stage_group_type`,
+			`stage_group_sub_type` = `p_stage_group_sub_type`,  
+			`last_updated_by` = `p_last_updated_by`,
+			`last_updated_time` = `p_last_updated_time` WHERE  (`patient_id` = `p_patient_id`);
+    
+    
+      when DbFlage='update_demography_referal' then
+      
+			UPDATE `demography` SET
+   
+				`recorded_by` = `p_recorded_by`,
+				`consultant` = `p_consultant`,
+				`referral_physician` = `p_referral_physician`,
+				`referral_hospital` = `p_referral_hospital`,
+				`last_updated_by` = `p_last_updated_by`,
+				`last_updated_time` = `p_last_updated_time` WHERE 
+				(`patient_id` = `p_patient_id`);
+					
+	
+
+
+
+end case;
+END

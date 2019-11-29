@@ -1,0 +1,9 @@
+
+
+
+changes in tables:
+
+
+1.patientmaster  table= hospitalname column added
+2.demography table=hositalname column added
+3investigation-histopathology table=labname column added
