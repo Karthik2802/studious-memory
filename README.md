@@ -1,3 +1,4 @@
 # studious-memory
 
-register users
+user registration for emr
+
